@@ -1,26 +1,188 @@
 @import "tailwindcss";
 
+/* ── Vericotte Brand Tokens ── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy: #153241;
+  --teal: #2d5867;
+  --orange: #ea5d05;
+  --warm-orange: #f37022;
+  --amber: #fba22e;
+  --cyan: #0a9fbf;
+  --off-white: #f1f1f0;
+  --charcoal: #4b4b4d;
+  --dark-navy: #0c1c26;
+  --grad-teal: #0c4f60;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: var(--navy);
+  --color-teal: var(--teal);
+  --color-orange: var(--orange);
+  --color-warm-orange: var(--warm-orange);
+  --color-amber: var(--amber);
+  --color-cyan: var(--cyan);
+  --color-off-white: var(--off-white);
+  --color-charcoal: var(--charcoal);
+  --color-dark-navy: var(--dark-navy);
+  --color-grad-teal: var(--grad-teal);
+  --font-sans: var(--font-montserrat);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--navy);
+  color: #ffffff;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scroll-reveal animation ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* stagger children */
+.reveal-stagger > .reveal:nth-child(1) {
+  transition-delay: 0ms;
+}
+.reveal-stagger > .reveal:nth-child(2) {
+  transition-delay: 80ms;
+}
+.reveal-stagger > .reveal:nth-child(3) {
+  transition-delay: 160ms;
+}
+.reveal-stagger > .reveal:nth-child(4) {
+  transition-delay: 240ms;
+}
+.reveal-stagger > .reveal:nth-child(5) {
+  transition-delay: 320ms;
+}
+.reveal-stagger > .reveal:nth-child(6) {
+  transition-delay: 400ms;
+}
+
+/* ── Counter animation ── */
+@property --num {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+/* ── Parallelogram pattern (SVG data-uri) ── */
+.pattern-parallelogram {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='15,5 45,5 35,55 5,55' fill='none' stroke='%230A9FBF' stroke-width='0.5' opacity='0.07'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+
+/* ── Glassmorphism utility ── */
+.glass {
+  background: rgba(21, 50, 65, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(234, 93, 5, 0.15);
+}
+
+/* ── Noise texture overlay ── */
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Page Loader ── */
+.loader-logo-wrap {
+  animation: loaderPulse 1.6s ease-in-out infinite;
+}
+
+.loader-logo {
+  animation: loaderFadeScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.loader-shape-1 {
+  animation: loaderSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.loader-shape-2 {
+  animation: loaderSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.loader-wordmark {
+  animation: loaderFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.loader-tagline {
+  animation: loaderFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.loader-progress {
+  animation: loaderBar 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+
+@keyframes loaderFadeScale {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes loaderSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px) skewX(-4deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) skewX(0);
+  }
+}
+
+@keyframes loaderFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes loaderBar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes loaderPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
 }

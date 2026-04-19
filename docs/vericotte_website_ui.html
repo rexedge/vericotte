@@ -1,0 +1,610 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .vc {
+    font-family: 'Montserrat', sans-serif;
+    background: #fff;
+    color: #153241;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  .vc-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 3rem;
+    background: #153241;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .vc-logo {
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .vc-logo-icon {
+    width: 32px; height: 32px; position: relative; flex-shrink: 0;
+  }
+  .vc-logo-text {
+    font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 0.01em;
+  }
+  .vc-logo-text span { color: #EA5D05; }
+  .vc-nav-links {
+    display: flex; gap: 2rem;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.65);
+  }
+  .vc-nav-links a { color: inherit; text-decoration: none; cursor: pointer; transition: color 0.2s; }
+  .vc-nav-links a:hover { color: #EA5D05; }
+  .vc-nav-cta {
+    background: #EA5D05; color: #fff; border: none;
+    padding: 0.6rem 1.6rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .vc-nav-cta:hover { background: #F37022; }
+
+  /* HERO */
+  .vc-hero {
+    background: #153241;
+    min-height: 90vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .vc-hero-bg-pattern {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.07;
+  }
+  .vc-hero-left { padding: 5rem 3rem 5rem 3.5rem; position: relative; z-index: 1; }
+  .vc-hero-tag {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: rgba(234,93,5,0.15); border: 1px solid rgba(234,93,5,0.35);
+    color: #EA5D05; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em;
+    padding: 0.4rem 0.9rem; margin-bottom: 2rem;
+  }
+  .vc-hero h1 {
+    font-size: 3.2rem; font-weight: 800; line-height: 1.1;
+    color: #fff; margin-bottom: 0.6rem;
+  }
+  .vc-hero h1 .accent { color: #EA5D05; }
+  .vc-tagline {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.45); margin-bottom: 1.5rem; text-transform: uppercase;
+  }
+  .vc-hero-desc {
+    font-size: 0.82rem; line-height: 2; color: rgba(255,255,255,0.55);
+    max-width: 420px; margin-bottom: 2.5rem;
+  }
+  .vc-hero-btns { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .vc-btn-orange {
+    background: #EA5D05; color: #fff; border: none;
+    padding: 0.85rem 2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .vc-btn-orange:hover { background: #F37022; }
+  .vc-btn-outline {
+    background: transparent; border: 1.5px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.7); padding: 0.85rem 2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+    cursor: pointer; transition: border-color 0.2s, color 0.2s;
+  }
+  .vc-btn-outline:hover { border-color: #EA5D05; color: #EA5D05; }
+
+  /* HERO RIGHT - stacked cards */
+  .vc-hero-right {
+    padding: 3rem 3rem 3rem 1rem; position: relative; z-index: 1;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .vc-card-glass {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 1.5rem;
+  }
+  .vc-card-glass .label {
+    font-size: 0.6rem; letter-spacing: 0.18em; font-weight: 600;
+    color: rgba(255,255,255,0.35); margin-bottom: 0.3rem; text-transform: uppercase;
+  }
+  .vc-card-glass .value {
+    font-size: 2rem; font-weight: 800; color: #fff; line-height: 1;
+  }
+  .vc-card-glass .sub { font-size: 0.62rem; color: #EA5D05; margin-top: 0.3rem; font-weight: 600; }
+  .vc-metrics-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .vc-service-pills {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;
+  }
+  .vc-pill {
+    background: rgba(234,93,5,0.15); border: 1px solid rgba(234,93,5,0.3);
+    color: #EA5D05; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em;
+    padding: 0.3rem 0.75rem; text-transform: uppercase;
+  }
+
+  /* STATS BAR */
+  .vc-stats {
+    background: #EA5D05;
+    display: grid; grid-template-columns: repeat(4,1fr);
+  }
+  .vc-stat {
+    padding: 2rem 1.5rem; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.2);
+  }
+  .vc-stat:last-child { border-right: none; }
+  .vc-stat-num { font-size: 2.5rem; font-weight: 800; color: #fff; line-height: 1; }
+  .vc-stat-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15em; color: rgba(255,255,255,0.75); margin-top: 0.4rem; text-transform: uppercase; }
+
+  /* ABOUT */
+  .vc-about {
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .vc-about-left {
+    background: #2D5867; padding: 5rem 3.5rem;
+  }
+  .vc-about-right { padding: 5rem 3.5rem; }
+  .vc-section-label {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.25em;
+    color: #EA5D05; text-transform: uppercase; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .vc-section-label::before {
+    content: ''; display: inline-block; width: 2rem; height: 2px; background: #EA5D05;
+  }
+  .vc-about-left h2 {
+    font-size: 2.2rem; font-weight: 800; color: #fff;
+    line-height: 1.2; margin-bottom: 1.5rem;
+  }
+  .vc-about-left p {
+    font-size: 0.8rem; line-height: 2; color: rgba(255,255,255,0.6);
+    margin-bottom: 1.5rem;
+  }
+  .vc-about-right h2 {
+    font-size: 2rem; font-weight: 800; color: #153241;
+    line-height: 1.2; margin-bottom: 1rem;
+  }
+  .vc-about-right .vc-section-label::before { background: #EA5D05; }
+  .vc-vision-mission { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.5rem; }
+  .vc-vm-card {
+    border-left: 3px solid #EA5D05; padding: 1rem 1.2rem;
+    background: #F1F1F0;
+  }
+  .vc-vm-card h4 {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+    color: #EA5D05; text-transform: uppercase; margin-bottom: 0.4rem;
+  }
+  .vc-vm-card p {
+    font-size: 0.78rem; line-height: 1.8; color: #2D5867; font-weight: 500;
+  }
+
+  /* SERVICES */
+  .vc-services { padding: 5rem 3rem; background: #fff; }
+  .vc-services-header { text-align: center; margin-bottom: 3rem; }
+  .vc-services-header h2 {
+    font-size: 2.2rem; font-weight: 800; color: #153241; margin-top: 0.5rem;
+  }
+  .vc-services-grid {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5px;
+    background: #e8e8e8;
+  }
+  .vc-svc {
+    background: #fff; padding: 2.5rem 1.8rem;
+    transition: background 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .vc-svc::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 100%; height: 3px; background: #EA5D05;
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.25s;
+  }
+  .vc-svc:hover::before { transform: scaleX(1); }
+  .vc-svc:hover { background: #F1F1F0; }
+  .vc-svc-num {
+    font-size: 2.5rem; font-weight: 800; color: rgba(234,93,5,0.12);
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .vc-svc-name {
+    font-size: 0.95rem; font-weight: 700; color: #153241; margin-bottom: 0.75rem;
+  }
+  .vc-svc-desc {
+    font-size: 0.7rem; line-height: 1.9; color: #4B4B4D;
+  }
+
+  /* WHY US */
+  .vc-why { background: #153241; padding: 5rem 3rem; }
+  .vc-why-inner { max-width: 900px; margin: 0 auto; }
+  .vc-why h2 {
+    font-size: 2.2rem; font-weight: 800; color: #fff;
+    margin-bottom: 3rem; text-align: center;
+  }
+  .vc-why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .vc-why-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 1.5rem;
+  }
+  .vc-why-dot {
+    width: 8px; height: 8px; background: #EA5D05; border-radius: 50%;
+    flex-shrink: 0; margin-top: 5px;
+  }
+  .vc-why-item h4 {
+    font-size: 0.8rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem;
+  }
+  .vc-why-item p { font-size: 0.7rem; line-height: 1.8; color: rgba(255,255,255,0.5); }
+
+  /* TESTIMONIALS */
+  .vc-testi { padding: 5rem 3rem; background: #F1F1F0; }
+  .vc-testi-header { text-align: center; margin-bottom: 3rem; }
+  .vc-testi-header h2 {
+    font-size: 2.2rem; font-weight: 800; color: #153241; margin-top: 0.5rem;
+  }
+  .vc-testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .vc-testi-card {
+    background: #fff; padding: 2rem;
+    border-top: 3px solid #EA5D05;
+  }
+  .vc-testi-quote {
+    font-size: 0.78rem; line-height: 2; color: #4B4B4D;
+    font-style: italic; margin-bottom: 1.5rem;
+  }
+  .vc-testi-quote::before { content: '\201C'; color: #EA5D05; font-size: 1.5rem; font-style: normal; display: block; line-height: 1; margin-bottom: 0.5rem; }
+  .vc-testi-author { display: flex; align-items: center; gap: 0.75rem; }
+  .vc-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: #153241; display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .vc-author-name { font-size: 0.75rem; font-weight: 700; color: #153241; }
+  .vc-author-role { font-size: 0.6rem; color: #EA5D05; font-weight: 600; letter-spacing: 0.08em; margin-top: 2px; }
+
+  /* CTA */
+  .vc-cta {
+    background: #EA5D05; padding: 4rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 2rem;
+  }
+  .vc-cta h2 {
+    font-size: 2rem; font-weight: 800; color: #fff; max-width: 500px;
+  }
+  .vc-cta p { font-size: 0.8rem; color: rgba(255,255,255,0.75); margin-top: 0.5rem; }
+  .vc-btn-white {
+    background: #fff; color: #EA5D05; border: none;
+    padding: 1rem 2.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+    cursor: pointer; white-space: nowrap; flex-shrink: 0;
+    transition: opacity 0.2s;
+  }
+  .vc-btn-white:hover { opacity: 0.9; }
+
+  /* FOOTER */
+  .vc-footer {
+    background: #0C1C26; padding: 3rem;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+  .vc-footer-brand p {
+    font-size: 0.7rem; line-height: 1.9;
+    color: rgba(255,255,255,0.35); margin-top: 1rem; max-width: 220px;
+  }
+  .vc-footer-col h5 {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em;
+    color: #EA5D05; text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .vc-footer-col a {
+    display: block; font-size: 0.7rem; color: rgba(255,255,255,0.4);
+    text-decoration: none; margin-bottom: 0.6rem; cursor: pointer;
+    transition: color 0.2s;
+  }
+  .vc-footer-col a:hover { color: #EA5D05; }
+  .vc-footer-bottom {
+    background: #0C1C26; padding: 1rem 3rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.62rem; color: rgba(255,255,255,0.25); letter-spacing: 0.08em;
+  }
+
+  /* Logo SVG inline */
+  .vc-logo-svg { width: 30px; height: 30px; }
+</style>
+
+<div class="vc">
+
+  <!-- NAV -->
+  <nav class="vc-nav">
+    <div class="vc-logo">
+      <svg class="vc-logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="8" width="18" height="22" rx="2" fill="#0A9FBF" opacity="0.9" transform="rotate(-6 4 8)"/>
+        <rect x="12" y="4" width="18" height="22" rx="2" fill="#EA5D05" opacity="0.95" transform="rotate(5 12 4)"/>
+        <circle cx="26" cy="6" r="3" fill="#FBA22E"/>
+      </svg>
+      <span class="vc-logo-text">Vericotte</span>
+    </div>
+    <div class="vc-nav-links">
+      <a>About</a>
+      <a>Services</a>
+      <a>Industries</a>
+      <a>Insights</a>
+      <a>Contact</a>
+    </div>
+    <button class="vc-nav-cta">Get Started</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="vc-hero">
+    <!-- Background pattern (Vericotte parallelogram shapes) -->
+    <svg class="vc-hero-bg-pattern" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <rect x="50" y="30" width="120" height="150" rx="4" fill="none" stroke="#fff" stroke-width="1" transform="rotate(-12 50 30)"/>
+      <rect x="200" y="80" width="90" height="110" rx="4" fill="none" stroke="#fff" stroke-width="1" transform="rotate(8 200 80)"/>
+      <rect x="350" y="10" width="110" height="130" rx="4" fill="none" stroke="#fff" stroke-width="1" transform="rotate(-5 350 10)"/>
+      <rect x="500" y="60" width="80" height="100" rx="4" fill="none" stroke="#fff" stroke-width="1" transform="rotate(10 500 60)"/>
+      <rect x="650" y="20" width="120" height="140" rx="4" fill="none" stroke="#fff" stroke-width="1" transform="rotate(-8 650 20)"/>
+      <rect x="100" y="300" width="100" height="120" rx="4" fill="none" stroke="#fff" stroke-width="1" transform="rotate(6 100 300)"/>
+      <rect x="280" y="350" width="130" height="160" rx="4" fill="none" stroke="#fff" stroke-width="1" transform="rotate(-10 280 350)"/>
+      <rect x="450" y="280" width="95" height="115" rx="4" fill="none" stroke="#fff" stroke-width="1" transform="rotate(7 450 280)"/>
+      <rect x="600" y="320" width="110" height="135" rx="4" fill="none" stroke="#fff" stroke-width="1" transform="rotate(-6 600 320)"/>
+    </svg>
+
+    <div class="vc-hero-left">
+      <div class="vc-hero-tag">Audit · Tax · Advisory</div>
+      <div class="vc-tagline">Navigating Complexity, Innovating Tomorrow</div>
+      <h1>Nigeria's <span class="accent">Leading</span><br>Business Consulting<br>Firm</h1>
+      <p class="vc-hero-desc">Vericotte delivers excellence in audit, accounting, tax, consulting, and business advisory — combining youthful vigor with seasoned expertise to create results.</p>
+      <div class="vc-hero-btns">
+        <button class="vc-btn-orange" onclick="sendPrompt('Tell me about Vericotte consulting services')">Our Services ↗</button>
+        <button class="vc-btn-outline">Corporate Profile</button>
+      </div>
+    </div>
+
+    <div class="vc-hero-right">
+      <div class="vc-metrics-row">
+        <div class="vc-card-glass">
+          <div class="label">Assets Managed</div>
+          <div class="value">₦40B+</div>
+          <div class="sub">▲ 12.4% YoY</div>
+        </div>
+        <div class="vc-card-glass">
+          <div class="label">Client Retention</div>
+          <div class="value">98%</div>
+          <div class="sub">Consistent excellence</div>
+        </div>
+      </div>
+      <div class="vc-card-glass">
+        <div class="label">Core Practice Areas</div>
+        <div style="margin-top:0.8rem;">
+          <div class="vc-service-pills">
+            <span class="vc-pill">Audit</span>
+            <span class="vc-pill">Tax Strategy</span>
+            <span class="vc-pill">Advisory</span>
+            <span class="vc-pill">Accounting</span>
+            <span class="vc-pill">Business Consulting</span>
+          </div>
+        </div>
+      </div>
+      <div class="vc-card-glass" style="display:flex; align-items:center; gap:1rem;">
+        <div style="flex:1;">
+          <div class="label">Headquarters</div>
+          <div style="color:#fff;font-size:0.8rem;font-weight:600;margin-top:0.3rem;">Lagos, Nigeria</div>
+          <div style="color:rgba(255,255,255,0.4);font-size:0.65rem;margin-top:0.2rem;">Lagos to Badagry Expressway</div>
+        </div>
+        <div style="font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.1em;border-left:1px solid rgba(255,255,255,0.1);padding-left:1rem;">
+          <div style="color:#fff;font-size:0.7rem;font-weight:600;">vericotte.com</div>
+          <div style="margin-top:0.3rem;">info@vericotte.com</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="vc-stats">
+    <div class="vc-stat"><div class="vc-stat-num">15+</div><div class="vc-stat-label">Years of Excellence</div></div>
+    <div class="vc-stat"><div class="vc-stat-num">200+</div><div class="vc-stat-label">Clients Served</div></div>
+    <div class="vc-stat"><div class="vc-stat-num">₦40B+</div><div class="vc-stat-label">Assets Managed</div></div>
+    <div class="vc-stat"><div class="vc-stat-num">98%</div><div class="vc-stat-label">Retention Rate</div></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="vc-about">
+    <div class="vc-about-left">
+      <div class="vc-section-label" style="color:#EA5D05;">Who We Are</div>
+      <h2>A New Powerhouse<br>in Audit &amp; Accounting</h2>
+      <p>Vericotte is a recently established powerhouse in the realm of audit and accounting, offering a comprehensive suite of high-quality financial services that encompass audit, accounting, tax, consulting, and business advisory.</p>
+      <p>We stand as a beacon of excellence, founded and driven by a select group of dedicated professionals whose combined youthful vigor and seasoned expertise create a winning formula for success.</p>
+      <button class="vc-btn-orange" style="margin-top:1rem;" onclick="sendPrompt('Tell me more about Vericotte as a firm')">Learn More ↗</button>
+    </div>
+    <div class="vc-about-right">
+      <div class="vc-section-label">Our Direction</div>
+      <h2>Purpose-Driven.<br>Results-Oriented.</h2>
+      <div class="vc-vision-mission">
+        <div class="vc-vm-card">
+          <h4>Our Vision</h4>
+          <p>To be the leading business consulting firm — in Audit, Tax, and Business Advisory — in Nigeria.</p>
+        </div>
+        <div class="vc-vm-card">
+          <h4>Our Mission</h4>
+          <p>To deliver excellence in business consulting services through a dedicated, problem-solving approach that creates lasting value for every client.</p>
+        </div>
+        <div class="vc-vm-card">
+          <h4>Our Promise</h4>
+          <p>Navigating complexity with you — bringing clarity, innovation, and unwavering integrity to every engagement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="vc-services">
+    <div class="vc-services-header">
+      <div class="vc-section-label" style="justify-content:center;">What We Do</div>
+      <h2>Comprehensive Financial Services</h2>
+    </div>
+    <div class="vc-services-grid">
+      <div class="vc-svc">
+        <div class="vc-svc-num">01</div>
+        <div class="vc-svc-name">Audit &amp; Assurance</div>
+        <div class="vc-svc-desc">Rigorous, independent audits that provide stakeholder confidence and surface operational and financial risks before they become costly.</div>
+      </div>
+      <div class="vc-svc">
+        <div class="vc-svc-num">02</div>
+        <div class="vc-svc-name">Tax Advisory</div>
+        <div class="vc-svc-desc">Proactive tax strategy and compliance designed to minimise liability and maximise legitimate advantage under Nigerian and international tax law.</div>
+      </div>
+      <div class="vc-svc">
+        <div class="vc-svc-num">03</div>
+        <div class="vc-svc-name">Business Advisory</div>
+        <div class="vc-svc-desc">Strategic guidance on business structure, growth planning, and performance improvement — from early-stage ventures to established enterprises.</div>
+      </div>
+      <div class="vc-svc">
+        <div class="vc-svc-num">04</div>
+        <div class="vc-svc-name">Accounting &amp; Reporting</div>
+        <div class="vc-svc-desc">Accurate, timely financial reporting and bookkeeping that keeps your business compliant, informed, and in full control of its numbers.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="vc-why">
+    <div class="vc-why-inner">
+      <div class="vc-section-label" style="justify-content:center;color:#EA5D05;">Why Choose Vericotte</div>
+      <h2>Built Different. Built Better.</h2>
+      <div class="vc-why-grid">
+        <div class="vc-why-item">
+          <div class="vc-why-dot"></div>
+          <div>
+            <h4>Certified Professionals</h4>
+            <p>ICAN-licensed, FIRS-compliant, and experienced across the full spectrum of financial services in Nigeria.</p>
+          </div>
+        </div>
+        <div class="vc-why-item">
+          <div class="vc-why-dot"></div>
+          <div>
+            <h4>Technology-Driven</h4>
+            <p>We deploy modern tools and reporting systems that give clients real-time visibility into their financial health.</p>
+          </div>
+        </div>
+        <div class="vc-why-item">
+          <div class="vc-why-dot"></div>
+          <div>
+            <h4>Sector Specialists</h4>
+            <p>Deep expertise across fintech, real estate, manufacturing, NGOs, and professional services sectors.</p>
+          </div>
+        </div>
+        <div class="vc-why-item">
+          <div class="vc-why-dot"></div>
+          <div>
+            <h4>Proactive Counsel</h4>
+            <p>We identify risks and opportunities before they appear on your books — not after. Forward-looking by design.</p>
+          </div>
+        </div>
+        <div class="vc-why-item">
+          <div class="vc-why-dot"></div>
+          <div>
+            <h4>Transparent Pricing</h4>
+            <p>Clear deliverables, honest fees, no hidden costs. We believe great service and fair pricing go hand in hand.</p>
+          </div>
+        </div>
+        <div class="vc-why-item">
+          <div class="vc-why-dot"></div>
+          <div>
+            <h4>Youthful Vigour, Proven Expertise</h4>
+            <p>Our unique blend of fresh thinking and seasoned professional experience creates a winning formula for clients.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="vc-testi">
+    <div class="vc-testi-header">
+      <div class="vc-section-label" style="justify-content:center;">Client Voices</div>
+      <h2>Trusted Across Nigeria</h2>
+    </div>
+    <div class="vc-testi-grid">
+      <div class="vc-testi-card">
+        <div class="vc-testi-quote">Vericotte's tax strategy team identified savings we didn't know were possible. Their proactive approach has been invaluable to our growth.</div>
+        <div class="vc-testi-author">
+          <div class="vc-avatar">AO</div>
+          <div>
+            <div class="vc-author-name">Adaeze Okonkwo</div>
+            <div class="vc-author-role">CEO · BrightPath Holdings</div>
+          </div>
+        </div>
+      </div>
+      <div class="vc-testi-card">
+        <div class="vc-testi-quote">The audit process was thorough yet seamless. Their team communicated clearly at every step and delivered on time, every time.</div>
+        <div class="vc-testi-author">
+          <div class="vc-avatar">EI</div>
+          <div>
+            <div class="vc-author-name">Emeka Ifeanyi</div>
+            <div class="vc-author-role">CFO · Vertex Realty Group</div>
+          </div>
+        </div>
+      </div>
+      <div class="vc-testi-card">
+        <div class="vc-testi-quote">A rare combination of professionalism and genuine investment in our success. Vericotte is not just our accountants — they are our strategic partners.</div>
+        <div class="vc-testi-author">
+          <div class="vc-avatar">FK</div>
+          <div>
+            <div class="vc-author-name">Funmi Kazeem</div>
+            <div class="vc-author-role">MD · Solaris Fintech</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="vc-cta">
+    <div>
+      <h2>Ready to Navigate Complexity Together?</h2>
+      <p>Schedule a free consultation with one of our senior advisors today.</p>
+    </div>
+    <button class="vc-btn-white" onclick="sendPrompt('I want to book a consultation with Vericotte')">Book a Consultation ↗</button>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="vc-footer">
+    <div class="vc-footer-brand">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+          <rect x="4" y="8" width="18" height="22" rx="2" fill="#0A9FBF" opacity="0.9" transform="rotate(-6 4 8)"/>
+          <rect x="12" y="4" width="18" height="22" rx="2" fill="#EA5D05" opacity="0.95" transform="rotate(5 12 4)"/>
+          <circle cx="26" cy="6" r="3" fill="#FBA22E"/>
+        </svg>
+        <span style="color:#fff;font-weight:700;font-size:1rem;">Vericotte</span>
+      </div>
+      <p>Navigating Complexity, Innovating Tomorrow.<br>Lagos, Nigeria · vericotte.com</p>
+    </div>
+    <div class="vc-footer-col">
+      <h5>Services</h5>
+      <a>Audit &amp; Assurance</a>
+      <a>Tax Advisory</a>
+      <a>Business Advisory</a>
+      <a>Accounting</a>
+      <a>Consulting</a>
+    </div>
+    <div class="vc-footer-col">
+      <h5>Company</h5>
+      <a>About Us</a>
+      <a>Our Team</a>
+      <a>Careers</a>
+      <a>Insights</a>
+      <a>Contact</a>
+    </div>
+    <div class="vc-footer-col">
+      <h5>Contact</h5>
+      <a>+234 808 393 7409</a>
+      <a>info@vericotte.com</a>
+      <a>vericotte.com</a>
+      <a style="line-height:1.6;color:rgba(255,255,255,0.3);">Lagos to Badagry Exp. Way<br>Lagos, Nigeria</a>
+    </div>
+  </div>
+  <div class="vc-footer-bottom">
+    <span>© 2025 Vericotte. All rights reserved.</span>
+    <span style="display:flex;gap:1.5rem;"><span style="cursor:pointer;">Privacy Policy</span><span style="cursor:pointer;">Terms of Use</span><span style="cursor:pointer;">ICAN Licensed</span></span>
+  </div>
+
+</div>
