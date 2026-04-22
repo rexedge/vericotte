@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function PageLoader() {
   const [phase, setPhase] = useState<"loading" | "exiting" | "done">("loading");
@@ -37,30 +38,16 @@ export default function PageLoader() {
 
       {/* Logo mark + wordmark */}
       <div className="relative z-10 flex flex-col items-center gap-5">
-        {/* Animated parallelogram logo */}
+        {/* Logo */}
         <div className="loader-logo-wrap">
-          <svg
-            width="56"
-            height="56"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <Image
+            src="/logo.png"
+            alt="Vericotte"
+            width={56}
+            height={56}
             className="loader-logo"
-            aria-hidden="true"
-          >
-            <polygon
-              points="8,4 24,4 20,28 4,28"
-              fill="#0A9FBF"
-              opacity="0.8"
-              className="loader-shape-1"
-            />
-            <polygon
-              points="12,4 28,4 24,28 8,28"
-              fill="#EA5D05"
-              opacity="0.7"
-              className="loader-shape-2"
-            />
-          </svg>
+            priority
+          />
         </div>
 
         {/* Wordmark */}

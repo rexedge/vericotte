@@ -1,13 +1,17 @@
+import Image from "next/image";
+import Link from "next/link";
+
 const FOOTER_LINKS = {
   Services: [
-    { label: "Audit & Assurance", href: "#services" },
-    { label: "Tax Advisory", href: "#services" },
-    { label: "Business Advisory", href: "#services" },
+    { label: "Audit & Assurance", href: "/#services" },
+    { label: "Tax Advisory", href: "/#services" },
+    { label: "Business Advisory", href: "/#services" },
   ],
   Company: [
-    { label: "About Us", href: "#about" },
-    { label: "Why Vericotte", href: "#why" },
-    { label: "Testimonials", href: "#testimonials" },
+    { label: "About Us", href: "/#about" },
+    { label: "Our Team", href: "/team" },
+    { label: "Insights", href: "/insights" },
+    { label: "Careers", href: "/careers" },
   ],
 };
 
@@ -19,25 +23,7 @@ export default function Footer() {
           {/* Col 1 — Logo & tagline */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <polygon
-                  points="8,4 24,4 20,28 4,28"
-                  fill="#0A9FBF"
-                  opacity="0.8"
-                />
-                <polygon
-                  points="12,4 28,4 24,28 8,28"
-                  fill="#EA5D05"
-                  opacity="0.7"
-                />
-              </svg>
+              <Image src="/logo.png" alt="Vericotte" width={28} height={28} />
               <span className="text-lg font-extrabold text-white">
                 Vericotte<span className="text-orange">.</span>
               </span>
@@ -58,12 +44,12 @@ export default function Footer() {
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <a
+                    <Link
                       href={link.href}
                       className="text-sm text-white/55 transition-colors duration-200 hover:text-orange"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

@@ -1,24 +1,34 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
-const NAV_LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Why Us", href: "#why" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#footer" },
+const HOME_LINKS = [
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
+  { label: "Why Us", href: "/#why" },
+];
+
+const PAGE_LINKS = [
+  { label: "Our Team", href: "/team" },
+  { label: "Insights", href: "/insights" },
+  { label: "Careers", href: "/careers" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const allLinks = [...HOME_LINKS, ...PAGE_LINKS];
 
   return (
     <nav
@@ -30,34 +40,42 @@ export default function Navbar() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 group">
-          <VericotteLogo />
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <Image src="/logo.png" alt="Vericotte" width={32} height={32} />
           <span className="text-xl font-extrabold tracking-tight text-white">
             Vericotte
             <span className="text-orange">.</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70 transition-colors duration-200 hover:text-orange"
-            >
-              {link.label}
-            </a>
-          ))}
+        <div className="hidden items-center gap-6 md:flex">
+          {allLinks.map((link) => {
+            const isActive =
+              link.href !== "/" &&
+              !link.href.startsWith("/#") &&
+              pathname === link.href;
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={`text-xs font-semibold uppercase tracking-[0.18em] transition-colors duration-200 hover:text-orange ${
+                  isActive ? "text-orange" : "text-white/70"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
         {/* CTA */}
-        <a
-          href="#cta"
+        <Link
+          href="/#cta"
           className="hidden rounded-md bg-orange px-5 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:bg-warm-orange hover:scale-105 md:inline-block"
         >
           Get Started
-        </a>
+        </Link>
 
         {/* Mobile hamburger */}
         <button
@@ -86,42 +104,25 @@ export default function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="border-t border-white/10 bg-navy px-6 pb-6 md:hidden">
-          {NAV_LINKS.map((link) => (
-            <a
+          {allLinks.map((link) => (
+            <Link
               key={link.label}
               href={link.href}
               onClick={() => setMobileOpen(false)}
               className="block py-3 text-sm font-semibold uppercase tracking-widest text-white/70 transition-colors hover:text-orange"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#cta"
+          <Link
+            href="/#cta"
             onClick={() => setMobileOpen(false)}
             className="mt-3 block rounded-md bg-orange px-5 py-2.5 text-center text-sm font-bold text-white"
           >
             Get Started
-          </a>
+          </Link>
         </div>
       )}
     </nav>
-  );
-}
-
-function VericotteLogo() {
-  return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      {/* Parallelogram crystal icon inspired by brand */}
-      <polygon points="8,4 24,4 20,28 4,28" fill="#0A9FBF" opacity="0.8" />
-      <polygon points="12,4 28,4 24,28 8,28" fill="#EA5D05" opacity="0.7" />
-    </svg>
   );
 }
